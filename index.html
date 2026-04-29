@@ -326,17 +326,15 @@
             btn.textContent = 'LOADING...';
             btn.disabled = true;
 
-            fetch('https://script.google.com/macros/s/AKfycbxdmIQrq-fAxe4ZQRgcccFJ2MbiBHNtyp-oMdxQ_q75gO-oxMK80mBhizmPjpy2S0oiHA/exec', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name: name, email: email })
-            })
-            .then(function() {
-                document.getElementById('gate').style.display = 'none';
-            })
-            .catch(function() {
-                document.getElementById('gate').style.display = 'none';
-            });
+            var url = 'https://script.google.com/macros/s/AKfycbz0mxvFx6OG4RCYRJ4BsYR_P1NCbHajHim009LXo-rrC0G3JeuZJgD4Lnjr0-AJSPoPJA/exec?name=' + encodeURIComponent(name) + '&email=' + encodeURIComponent(email);
+
+fetch(url, { method: 'GET' })
+.then(function() {
+    document.getElementById('gate').style.display = 'none';
+})
+.catch(function() {
+    document.getElementById('gate').style.display = 'none';
+});
         }
     </script>    <header>
         <div class="logo">
