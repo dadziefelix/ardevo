@@ -191,8 +191,154 @@
     </style>
 </head>
 <body>
+<!-- Lead Capture Gate -->
+    <div id="gate" style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #0f1923;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Segoe UI', sans-serif;
+    ">
+        <div style="
+            background: #1a2f5a;
+            border: 1px solid #D4A017;
+            border-radius: 12px;
+            padding: 50px 40px;
+            width: 100%;
+            max-width: 480px;
+            text-align: center;
+            margin: 20px;
+        ">
+            <h1 style="
+                color: #D4A017;
+                font-size: 2.5rem;
+                font-weight: 700;
+                letter-spacing: 3px;
+                margin-bottom: 8px;
+            ">ARDEVO</h1>
 
-    <header>
+            <p style="
+                color: #8899aa;
+                font-size: 0.85rem;
+                letter-spacing: 2px;
+                margin-bottom: 32px;
+            ">WATCH. DETECT. PROTECT.</p>
+
+            <p style="
+                color: #ffffff;
+                font-size: 1rem;
+                margin-bottom: 32px;
+                line-height: 1.6;
+            ">Enter your details to access the live demo of Ghana's first purpose-built MoMo fraud detection tool.</p>
+
+            <input
+                type="text"
+                id="gateName"
+                placeholder="Your Full Name"
+                style="
+                    width: 100%;
+                    padding: 14px 16px;
+                    background: #0f1923;
+                    border: 1px solid #2a4a7a;
+                    border-radius: 6px;
+                    color: #ffffff;
+                    font-size: 1rem;
+                    margin-bottom: 16px;
+                    box-sizing: border-box;
+                    outline: none;
+                "
+            />
+
+            <input
+                type="email"
+                id="gateEmail"
+                placeholder="Your Email Address"
+                style="
+                    width: 100%;
+                    padding: 14px 16px;
+                    background: #0f1923;
+                    border: 1px solid #2a4a7a;
+                    border-radius: 6px;
+                    color: #ffffff;
+                    font-size: 1rem;
+                    margin-bottom: 24px;
+                    box-sizing: border-box;
+                    outline: none;
+                "
+            />
+
+            <button
+                onclick="submitGate()"
+                style="
+                    width: 100%;
+                    padding: 16px;
+                    background: #D4A017;
+                    color: #0f1923;
+                    border: none;
+                    border-radius: 6px;
+                    font-size: 1rem;
+                    font-weight: 700;
+                    letter-spacing: 1px;
+                    cursor: pointer;
+                "
+            >ACCESS DEMO</button>
+
+            <p id="gateError" style="
+                color: #e74c3c;
+                font-size: 0.85rem;
+                margin-top: 16px;
+                display: none;
+            ">Please enter your name and email to continue.</p>
+
+            <p style="
+                color: #8899aa;
+                font-size: 0.75rem;
+                margin-top: 24px;
+                line-height: 1.5;
+            ">Your information will not be shared with third parties.<br>© 2026 Ardevo. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        function submitGate() {
+            var name = document.getElementById('gateName').value.trim();
+            var email = document.getElementById('gateEmail').value.trim();
+            var error = document.getElementById('gateError');
+
+            if (!name || !email) {
+                error.style.display = 'block';
+                return;
+            }
+
+            if (!email.includes('@') || !email.includes('.')) {
+                error.textContent = 'Please enter a valid email address.';
+                error.style.display = 'block';
+                return;
+            }
+
+            var btn = document.querySelector('#gate button');
+            btn.textContent = 'LOADING...';
+            btn.disabled = true;
+
+            fetch('https://script.google.com/macros/s/AKfycbxdmIQrq-fAxe4ZQRgcccFJ2MbiBHNtyp-oMdxQ_q75gO-oxMK80mBhizmPjpy2S0oiHA/exec', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name: name, email: email })
+            })
+            .then(function() {
+                document.getElementById('gate').style.display = 'none';
+            })
+            .catch(function() {
+                document.getElementById('gate').style.display = 'none';
+            });
+        }
+    </script>    <header>
         <div class="logo">
             <h1>ARDEVO</h1>
             <p>WATCH. DETECT. PROTECT.</p>
