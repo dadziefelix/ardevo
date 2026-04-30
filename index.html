@@ -353,7 +353,90 @@ fetch(url, { method: 'GET' })
         <button class="run-btn" onclick="runAnalysis()">RUN ANALYSIS</button>
     </header>
 <div class="main">
-  
+  <div style="text-align: center; margin-bottom: 24px;">
+    <button onclick="document.getElementById('infoModal').style.display='flex'" style="
+        background: transparent;
+        border: 1px solid #D4A017;
+        color: #D4A017;
+        padding: 8px 20px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+        cursor: pointer;
+        font-family: 'Segoe UI', sans-serif;
+    ">WHAT AM I LOOKING AT?</button>
+</div>
+
+<div id="infoModal" onclick="if(event.target===this)this.style.display='none'" style="
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 9998;
+    align-items: center;
+    justify-content: center;
+">
+    <div style="
+        background: #1a2f5a;
+        border: 1px solid #D4A017;
+        border-radius: 12px;
+        padding: 40px;
+        max-width: 560px;
+        width: 90%;
+        position: relative;
+        font-family: 'Segoe UI', sans-serif;
+    ">
+        <button onclick="document.getElementById('infoModal').style.display='none'" style="
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: transparent;
+            border: none;
+            color: #8899aa;
+            font-size: 1.2rem;
+            cursor: pointer;
+        ">✕</button>
+
+        <h2 style="color: #D4A017; font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 16px;">ABOUT THIS DEMO</h2>
+
+        <p style="color: #ffffff; font-size: 0.95rem; line-height: 1.7; margin-bottom: 20px;">
+            Ardevo is a real-time fraud detection tool built specifically for Ghana's mobile money ecosystem. When you press <strong style="color: #D4A017;">RUN ANALYSIS</strong>, the system simulates 100 MoMo transactions and evaluates each one against a set of fraud detection rules based on documented attack patterns in Ghana.
+        </p>
+
+        <div style="border-top: 1px solid #2a4a7a; padding-top: 20px; margin-bottom: 20px;">
+            <p style="color: #D4A017; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 12px;">WHAT THE NUMBERS MEAN</p>
+
+            <div style="margin-bottom: 12px;">
+                <span style="color: #ffffff; font-weight: bold;">Analyzed</span>
+                <span style="color: #8899aa; font-size: 0.9rem;"> — Total number of transactions processed in this analysis run.</span>
+            </div>
+            <div style="margin-bottom: 12px;">
+                <span style="color: #ffffff; font-weight: bold;">Flagged</span>
+                <span style="color: #8899aa; font-size: 0.9rem;"> — Transactions identified as suspicious based on fraud detection rules. These would trigger an alert in a live environment.</span>
+            </div>
+            <div style="margin-bottom: 12px;">
+                <span style="color: #ffffff; font-weight: bold;">High Risk</span>
+                <span style="color: #8899aa; font-size: 0.9rem;"> — Transactions that scored above the high risk threshold. These represent the most urgent fraud signals requiring immediate attention.</span>
+            </div>
+            <div style="margin-bottom: 12px;">
+                <span style="color: #ffffff; font-weight: bold;">Flag Rate</span>
+                <span style="color: #8899aa; font-size: 0.9rem;"> — The percentage of transactions flagged as suspicious. A realistic fraud rate for MoMo transactions in Ghana typically falls between 5 and 15 percent.</span>
+            </div>
+        </div>
+
+        <div style="border-top: 1px solid #2a4a7a; padding-top: 20px;">
+            <p style="color: #D4A017; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 12px;">WHAT THE TRANSACTION FEED SHOWS</p>
+            <p style="color: #8899aa; font-size: 0.9rem; line-height: 1.6;">Each card in the feed represents a flagged transaction. The colored border indicates risk level — red for high risk and amber for medium risk. Each card shows the transaction ID, type, sender phone number, amount in GHS, and mobile network.</p>
+        </div>
+
+        <div style="border-top: 1px solid #2a4a7a; padding-top: 20px; margin-top: 4px;">
+            <p style="color: #8899aa; font-size: 0.8rem; line-height: 1.5; text-align: center; font-style: italic;">This is a simulated demo using generated data. In a live deployment, Ardevo connects directly to a fintech platform's transaction feed and monitors in real time.</p>
+        </div>
+    </div>
+</div>
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="number" id="total">0</div>
