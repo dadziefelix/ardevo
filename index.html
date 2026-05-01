@@ -7,7 +7,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-9MFX82140E');
 </script>
     <meta charset="UTF-8">
@@ -50,6 +49,12 @@
             margin-top: 4px;
         }
 
+        .header-btns {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
         .run-btn {
             background: #D4A017;
             color: #0f1923;
@@ -68,6 +73,31 @@
             transform: translateY(-2px);
         }
 
+        .run-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        #runAgainBtn {
+            display: none;
+            background: transparent;
+            border: 2px solid #D4A017;
+            color: #D4A017;
+            padding: 10px 28px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border-radius: 4px;
+            cursor: pointer;
+            letter-spacing: 1px;
+            font-family: 'Segoe UI', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        #runAgainBtn:hover {
+            background: rgba(212, 160, 23, 0.1);
+        }
+
         .main {
             padding: 40px;
             max-width: 1200px;
@@ -78,7 +108,7 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 20px;
-            margin-bottom: 40px;
+            margin-bottom: 24px;
         }
 
         .stat-card {
@@ -102,6 +132,111 @@
             margin-top: 8px;
         }
 
+        /* ── FRAUD PATTERN BREAKDOWN ── */
+        #patternBreakdown {
+            display: none;
+            background: #111e2e;
+            border: 1px solid #2a4a7a;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+
+        #patternBreakdown .pattern-title {
+            color: #D4A017;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #2a4a7a;
+        }
+
+        .pattern-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 14px;
+        }
+
+        .pattern-item {
+            background: #1a2f5a;
+            border-radius: 6px;
+            padding: 14px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 3px solid #2a4a7a;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .pattern-item.active {
+            border-left-color: #e74c3c;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .pattern-name {
+            color: #cdd9e5;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+
+        .pattern-count {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #D4A017;
+        }
+
+        .pattern-count.zero {
+            color: #3a5a7a;
+        }
+
+        /* ── LOADING STATE ── */
+        #loadingState {
+            display: none;
+            text-align: center;
+            padding: 60px 20px;
+            animation: pulse 1.2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .loading-label {
+            color: #D4A017;
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            margin-bottom: 12px;
+        }
+
+        .loading-counter {
+            color: #8899aa;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        .loading-bar-track {
+            width: 200px;
+            height: 3px;
+            background: #1a2f5a;
+            border-radius: 2px;
+            margin: 14px auto 0;
+            overflow: hidden;
+        }
+
+        .loading-bar-fill {
+            height: 100%;
+            background: #D4A017;
+            border-radius: 2px;
+            width: 0%;
+            transition: width 0.05s linear;
+        }
+
+        /* ── SECTION / FEED ── */
         .section-title {
             color: #D4A017;
             font-size: 0.85rem;
@@ -134,17 +269,9 @@
             to { opacity: 1; transform: translateX(0); }
         }
 
-        .transaction-card.high {
-            border-left-color: #e74c3c;
-        }
-
-        .transaction-card.medium {
-            border-left-color: #f39c12;
-        }
-
-        .transaction-card.low {
-            border-left-color: #2ecc71;
-        }
+        .transaction-card.high { border-left-color: #e74c3c; }
+        .transaction-card.medium { border-left-color: #f39c12; }
+        .transaction-card.low { border-left-color: #2ecc71; }
 
         .risk-badge {
             padding: 6px 12px;
@@ -156,36 +283,12 @@
             white-space: nowrap;
         }
 
-        .risk-badge.high {
-            background: rgba(231, 76, 60, 0.2);
-            color: #e74c3c;
-            border: 1px solid #e74c3c;
-        }
+        .risk-badge.high { background: rgba(231,76,60,0.2); color: #e74c3c; border: 1px solid #e74c3c; }
+        .risk-badge.medium { background: rgba(243,156,18,0.2); color: #f39c12; border: 1px solid #f39c12; }
+        .risk-badge.low { background: rgba(46,204,113,0.2); color: #2ecc71; border: 1px solid #2ecc71; }
 
-        .risk-badge.medium {
-            background: rgba(243, 156, 18, 0.2);
-            color: #f39c12;
-            border: 1px solid #f39c12;
-        }
-
-        .risk-badge.low {
-            background: rgba(46, 204, 113, 0.2);
-            color: #2ecc71;
-            border: 1px solid #2ecc71;
-        }
-
-        .tx-label {
-            color: #8899aa;
-            font-size: 0.75rem;
-            letter-spacing: 1px;
-            margin-bottom: 4px;
-        }
-
-        .tx-value {
-            color: #ffffff;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
+        .tx-label { color: #8899aa; font-size: 0.75rem; letter-spacing: 1px; margin-bottom: 4px; }
+        .tx-value { color: #ffffff; font-size: 0.9rem; font-weight: 500; }
 
         .empty-state {
             text-align: center;
@@ -193,11 +296,99 @@
             color: #8899aa;
         }
 
-        .empty-state p {
-            font-size: 1rem;
-            letter-spacing: 1px;
+        .empty-state p { font-size: 1rem; letter-spacing: 1px; }
+
+        /* ── WHY ARDEVO SECTION ── */
+        #whyArdevo {
+            background: linear-gradient(135deg, #111e2e, #0f1923);
+            border-top: 1px solid #2a4a7a;
+            border-bottom: 1px solid #2a4a7a;
+            padding: 70px 40px;
+            text-align: center;
+            margin-top: 60px;
         }
-      @media (max-width: 768px) {
+
+        .why-eyebrow {
+            color: #D4A017;
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            margin-bottom: 24px;
+        }
+
+        .why-headline {
+            color: #ffffff;
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1.3;
+            max-width: 620px;
+            margin: 0 auto 24px;
+        }
+
+        .why-headline span {
+            color: #D4A017;
+        }
+
+        .why-body {
+            color: #8899aa;
+            font-size: 1rem;
+            line-height: 1.8;
+            max-width: 580px;
+            margin: 0 auto 40px;
+        }
+
+        .why-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-bottom: 48px;
+            flex-wrap: wrap;
+        }
+
+        .why-stat-item {
+            text-align: center;
+        }
+
+        .why-stat-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #D4A017;
+        }
+
+        .why-stat-label {
+            color: #8899aa;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            margin-top: 6px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: #D4A017;
+            color: #0f1923;
+            padding: 16px 44px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background: #f0b820;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(212, 160, 23, 0.3);
+        }
+
+        .cta-sub {
+            color: #3a5a7a;
+            font-size: 0.78rem;
+            letter-spacing: 1px;
+            margin-top: 16px;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
             header {
                 flex-direction: column;
                 align-items: flex-start;
@@ -205,23 +396,27 @@
                 padding: 20px;
             }
 
-            .run-btn {
+            .header-btns {
                 width: 100%;
-                padding: 14px;
+                flex-direction: column;
+                gap: 10px;
             }
 
-            .main {
-                padding: 20px;
+            .run-btn, #runAgainBtn {
+                width: 100%;
+                padding: 14px;
+                margin: 0;
+                text-align: center;
             }
+
+            .main { padding: 20px; }
 
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 12px;
             }
 
-            .stat-card .number {
-                font-size: 1.8rem;
-            }
+            .stat-card .number { font-size: 1.8rem; }
 
             .transaction-card {
                 grid-template-columns: 1fr 1fr;
@@ -234,27 +429,17 @@
                 text-align: center;
             }
 
-            .logo h1 {
-                font-size: 1.8rem;
-            }
+            .logo h1 { font-size: 1.8rem; }
+            .section-title { font-size: 0.75rem; }
+            .tx-value { font-size: 0.8rem; }
+            .tx-label { font-size: 0.7rem; }
 
-            .section-title {
-                font-size: 0.75rem;
-            }
-
-            .tx-value {
-                font-size: 0.8rem;
-            }
-
-            .tx-label {
-                font-size: 0.7rem;
-            }
-        .what-btn {
+            .what-btn {
                 font-size: 0.7rem;
                 padding: 6px 14px;
             }
 
-        #infoModal > div {
+            #infoModal > div {
                 padding: 24px 20px;
                 max-width: 92%;
                 max-height: 85vh;
@@ -262,24 +447,19 @@
                 margin: 20px;
             }
 
-            #infoModal h2 {
-                font-size: 0.9rem;
-            }
+            #infoModal h2 { font-size: 0.9rem; }
+            #infoModal p { font-size: 0.82rem; line-height: 1.5; }
+            #infoModal span { font-size: 0.82rem; }
 
-            #infoModal p {
-                font-size: 0.82rem;
-                line-height: 1.5;
-            }
+            .pattern-grid { grid-template-columns: 1fr 1fr; }
 
-            #infoModal span {
-                font-size: 0.82rem;
-            }
+            #whyArdevo { padding: 50px 24px; }
+            .why-headline { font-size: 1.5rem; }
+            .why-stats { gap: 36px; }
         }
 
         @media (max-width: 480px) {
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
 
             .transaction-card {
                 grid-template-columns: 1fr;
@@ -290,293 +470,244 @@
                 grid-column: 1;
                 text-align: left;
             }
+
+            .pattern-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-<!-- Lead Capture Gate -->
-    <div id="gate" style="
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: #0f1923;
-        z-index: 9999;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: 'Segoe UI', sans-serif;
-    ">
-        <div style="
-            background: #1a2f5a;
-            border: 1px solid #D4A017;
-            border-radius: 12px;
-            padding: 50px 40px;
-            width: 100%;
-            max-width: 480px;
-            text-align: center;
-            margin: 20px;
-        ">
-            <h1 style="
-                color: #D4A017;
-                font-size: 2.5rem;
-                font-weight: 700;
-                letter-spacing: 3px;
-                margin-bottom: 8px;
-            ">ARDEVO</h1>
 
-            <p style="
-                color: #8899aa;
-                font-size: 0.85rem;
-                letter-spacing: 2px;
-                margin-bottom: 32px;
-            ">WATCH. DETECT. PROTECT.</p>
-
-            <p style="
-                color: #ffffff;
-                font-size: 1rem;
-                margin-bottom: 32px;
-                line-height: 1.6;
-            ">Enter your details to access the live demo of Ghana's first purpose-built MoMo fraud detection tool.</p>
-
-            <input
-                type="text"
-                id="gateName"
-                placeholder="Your Full Name"
-                style="
-                    width: 100%;
-                    padding: 14px 16px;
-                    background: #0f1923;
-                    border: 1px solid #2a4a7a;
-                    border-radius: 6px;
-                    color: #ffffff;
-                    font-size: 1rem;
-                    margin-bottom: 16px;
-                    box-sizing: border-box;
-                    outline: none;
-                "
-            />
-
-            <input
-                type="email"
-                id="gateEmail"
-                placeholder="Your Email Address"
-                style="
-                    width: 100%;
-                    padding: 14px 16px;
-                    background: #0f1923;
-                    border: 1px solid #2a4a7a;
-                    border-radius: 6px;
-                    color: #ffffff;
-                    font-size: 1rem;
-                    margin-bottom: 24px;
-                    box-sizing: border-box;
-                    outline: none;
-                "
-            />
-
-            <button
-                onclick="submitGate()"
-                style="
-                    width: 100%;
-                    padding: 16px;
-                    background: #D4A017;
-                    color: #0f1923;
-                    border: none;
-                    border-radius: 6px;
-                    font-size: 1rem;
-                    font-weight: 700;
-                    letter-spacing: 1px;
-                    cursor: pointer;
-                "
-            >ACCESS DEMO</button>
-
-            <p id="gateError" style="
-                color: #e74c3c;
-                font-size: 0.85rem;
-                margin-top: 16px;
-                display: none;
-            ">Please enter your name and email to continue.</p>
-
-            <p style="
-                color: #8899aa;
-                font-size: 0.75rem;
-                margin-top: 24px;
-                line-height: 1.5;
-            ">Your information will not be shared with third parties.<br>© 2026 Ardevo. All rights reserved.</p>
-        </div>
-    </div>
-
-    <script>
-        function submitGate() {
-            var name = document.getElementById('gateName').value.trim();
-            var email = document.getElementById('gateEmail').value.trim();
-            var error = document.getElementById('gateError');
-
-            if (!name || !email) {
-                error.style.display = 'block';
-                return;
-            }
-
-            if (!email.includes('@') || !email.includes('.')) {
-                error.textContent = 'Please enter a valid email address.';
-                error.style.display = 'block';
-                return;
-            }
-
-            var btn = document.querySelector('#gate button');
-            btn.textContent = 'LOADING...';
-            btn.disabled = true;
-
-            var url = 'https://script.google.com/macros/s/AKfycbz0mxvFx6OG4RCYRJ4BsYR_P1NCbHajHim009LXo-rrC0G3JeuZJgD4Lnjr0-AJSPoPJA/exec?name=' + encodeURIComponent(name) + '&email=' + encodeURIComponent(email);
-
-fetch(url, { method: 'GET' })
-.then(function() {
-    document.getElementById('gate').style.display = 'none';
-})
-.catch(function() {
-    document.getElementById('gate').style.display = 'none';
-});
-        }
-    </script>    <header>
-        <div class="logo">
-            <h1>ARDEVO</h1>
-            <p>WATCH. DETECT. PROTECT.</p>
-        </div>
-      document.getElementById('runAgainBtn').style.display = 'none';
-        <button class="run-btn" onclick="runAnalysis()">RUN ANALYSIS</button>
-      <button id="runAgainBtn" onclick="runAnalysis()" style="
-    display: none;
-    background: transparent;
-    border: 2px solid #D4A017;
-    color: #D4A017;
-    padding: 10px 28px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    border-radius: 4px;
-    cursor: pointer;
-    letter-spacing: 1px;
+<!-- ── LEAD CAPTURE GATE ── -->
+<div id="gate" style="
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: #0f1923; z-index: 9999;
+    display: flex; align-items: center; justify-content: center;
     font-family: 'Segoe UI', sans-serif;
-    margin-left: 16px;
-    transition: all 0.3s ease;
-">↺ RUN AGAIN</button>
-    </header>
-<div class="main">
-  <div style="text-align: center; margin-bottom: 24px;">
-    <button class="what-btn" onclick="document.getElementById('infoModal').style.display='flex'" style="
-        background: transparent;
-        border: 1px solid #D4A017;
-        color: #D4A017;
-        padding: 8px 20px;
-        border-radius: 20px;
-        font-size: 0.8rem;
-        letter-spacing: 1px;
-        cursor: pointer;
-        font-family: 'Segoe UI', sans-serif;
-    ">WHAT AM I LOOKING AT?</button>
-</div>
-
-<div id="infoModal" onclick="if(event.target===this)this.style.display='none'" style="
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.7);
-    z-index: 9998;
-    align-items: center;
-    justify-content: center;
 ">
     <div style="
-        background: #1a2f5a;
-        border: 1px solid #D4A017;
-        border-radius: 12px;
-        padding: 40px;
-        max-width: 560px;
-        width: 90%;
-        position: relative;
-        font-family: 'Segoe UI', sans-serif;
+        background: #1a2f5a; border: 1px solid #D4A017;
+        border-radius: 12px; padding: 50px 40px;
+        width: 100%; max-width: 480px; text-align: center; margin: 20px;
     ">
-        <button onclick="document.getElementById('infoModal').style.display='none'" style="
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            background: transparent;
-            border: none;
-            color: #8899aa;
-            font-size: 1.2rem;
-            cursor: pointer;
-        ">✕</button>
+        <h1 style="color:#D4A017;font-size:2.5rem;font-weight:700;letter-spacing:3px;margin-bottom:8px;">ARDEVO</h1>
+        <p style="color:#8899aa;font-size:0.85rem;letter-spacing:2px;margin-bottom:32px;">WATCH. DETECT. PROTECT.</p>
+        <p style="color:#ffffff;font-size:1rem;margin-bottom:32px;line-height:1.6;">Enter your details to access the live demo of Ghana's first purpose-built MoMo fraud detection tool.</p>
 
-        <h2 style="color: #D4A017; font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 16px;">ABOUT THIS DEMO</h2>
+        <input type="text" id="gateName" placeholder="Your Full Name" style="
+            width:100%;padding:14px 16px;background:#0f1923;border:1px solid #2a4a7a;
+            border-radius:6px;color:#ffffff;font-size:1rem;margin-bottom:16px;
+            box-sizing:border-box;outline:none;
+        "/>
+        <input type="email" id="gateEmail" placeholder="Your Email Address" style="
+            width:100%;padding:14px 16px;background:#0f1923;border:1px solid #2a4a7a;
+            border-radius:6px;color:#ffffff;font-size:1rem;margin-bottom:24px;
+            box-sizing:border-box;outline:none;
+        "/>
+        <button onclick="submitGate()" style="
+            width:100%;padding:16px;background:#D4A017;color:#0f1923;border:none;
+            border-radius:6px;font-size:1rem;font-weight:700;letter-spacing:1px;cursor:pointer;
+        ">ACCESS DEMO</button>
 
-        <p style="color: #ffffff; font-size: 0.95rem; line-height: 1.7; margin-bottom: 20px;">
-            Ardevo is a real-time fraud detection tool built specifically for Ghana's mobile money ecosystem. When you press <strong style="color: #D4A017;">RUN ANALYSIS</strong>, the system simulates 100 MoMo transactions and evaluates each one against a set of fraud detection rules based on documented attack patterns in Ghana.
+        <p id="gateError" style="color:#e74c3c;font-size:0.85rem;margin-top:16px;display:none;">
+            Please enter your name and email to continue.
         </p>
-
-        <div style="border-top: 1px solid #2a4a7a; padding-top: 20px; margin-bottom: 20px;">
-            <p style="color: #D4A017; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 12px;">WHAT THE NUMBERS MEAN</p>
-
-            <div style="margin-bottom: 12px;">
-                <span style="color: #ffffff; font-weight: bold;">Analyzed</span>
-                <span style="color: #8899aa; font-size: 0.9rem;"> — Total number of transactions processed in this analysis run.</span>
-            </div>
-            <div style="margin-bottom: 12px;">
-                <span style="color: #ffffff; font-weight: bold;">Flagged</span>
-                <span style="color: #8899aa; font-size: 0.9rem;"> — Transactions identified as suspicious based on fraud detection rules. These would trigger an alert in a live environment.</span>
-            </div>
-            <div style="margin-bottom: 12px;">
-                <span style="color: #ffffff; font-weight: bold;">High Risk</span>
-                <span style="color: #8899aa; font-size: 0.9rem;"> — Transactions that scored above the high risk threshold. These represent the most urgent fraud signals requiring immediate attention.</span>
-            </div>
-            <div style="margin-bottom: 12px;">
-                <span style="color: #ffffff; font-weight: bold;">Flag Rate</span>
-                <span style="color: #8899aa; font-size: 0.9rem;"> — The percentage of transactions flagged as suspicious. A realistic fraud rate for MoMo transactions in Ghana typically falls between 5 and 15 percent.</span>
-            </div>
-        </div>
-
-        <div style="border-top: 1px solid #2a4a7a; padding-top: 20px;">
-            <p style="color: #D4A017; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 12px;">WHAT THE TRANSACTION FEED SHOWS</p>
-            <p style="color: #8899aa; font-size: 0.9rem; line-height: 1.6;">Each card in the feed represents a flagged transaction. The colored border indicates risk level — red for high risk and amber for medium risk. Each card shows the transaction ID, type, sender phone number, amount in GHS, and mobile network.</p>
-        </div>
-
-        <div style="border-top: 1px solid #2a4a7a; padding-top: 20px; margin-top: 4px;">
-            <p style="color: #8899aa; font-size: 0.8rem; line-height: 1.5; text-align: center; font-style: italic;">This is a simulated demo using generated data. In a live deployment, Ardevo connects directly to a fintech platform's transaction feed and monitors in real time.</p>
-        </div>
+        <p style="color:#8899aa;font-size:0.75rem;margin-top:24px;line-height:1.5;">
+            Your information will not be shared with third parties.<br>© 2026 Ardevo. All rights reserved.
+        </p>
     </div>
 </div>
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="number" id="total">0</div>
-                <div class="label">ANALYZED</div>
-            </div>
-            <div class="stat-card">
-                <div class="number" id="flagged">0</div>
-                <div class="label">FLAGGED</div>
-            </div>
-            <div class="stat-card">
-                <div class="number" id="high">0</div>
-                <div class="label">HIGH RISK</div>
-            </div>
-            <div class="stat-card">
-                <div class="number" id="flagRate">0%</div>
-                <div class="label">FLAG RATE</div>
-            </div>
-        </div>
 
-        <p class="section-title">TRANSACTION FEED</p>
-        <div class="transaction-feed" id="feed">
-            <div class="empty-state">
-                <p>Press RUN ANALYSIS to begin monitoring</p>
+<script>
+function submitGate() {
+    var name = document.getElementById('gateName').value.trim();
+    var email = document.getElementById('gateEmail').value.trim();
+    var error = document.getElementById('gateError');
+    if (!name || !email) { error.style.display = 'block'; return; }
+    if (!email.includes('@') || !email.includes('.')) {
+        error.textContent = 'Please enter a valid email address.';
+        error.style.display = 'block'; return;
+    }
+    var btn = document.querySelector('#gate button');
+    btn.textContent = 'LOADING...'; btn.disabled = true;
+    var url = 'https://script.google.com/macros/s/AKfycbz0mxvFx6OG4RCYRJ4BsYR_P1NCbHajHim009LXo-rrC0G3JeuZJgD4Lnjr0-AJSPoPJA/exec?name=' + encodeURIComponent(name) + '&email=' + encodeURIComponent(email);
+    fetch(url, { method: 'GET' })
+        .then(function() { document.getElementById('gate').style.display = 'none'; })
+        .catch(function() { document.getElementById('gate').style.display = 'none'; });
+}
+</script>
+
+<!-- ── HEADER ── -->
+<header>
+    <div class="logo">
+        <h1>ARDEVO</h1>
+        <p>WATCH. DETECT. PROTECT.</p>
+    </div>
+    <div class="header-btns">
+        <button class="run-btn" id="runBtn" onclick="runAnalysis()">RUN ANALYSIS</button>
+        <button id="runAgainBtn" onclick="runAnalysis()">↺ RUN AGAIN</button>
+    </div>
+</header>
+
+<!-- ── MAIN ── -->
+<div class="main">
+
+    <!-- What am I looking at button -->
+    <div style="text-align:center;margin-bottom:24px;">
+        <button class="what-btn" onclick="document.getElementById('infoModal').style.display='flex'" style="
+            background:transparent;border:1px solid #D4A017;color:#D4A017;
+            padding:8px 20px;border-radius:20px;font-size:0.8rem;
+            letter-spacing:1px;cursor:pointer;font-family:'Segoe UI',sans-serif;
+        ">WHAT AM I LOOKING AT?</button>
+    </div>
+
+    <!-- Info modal -->
+    <div id="infoModal" onclick="if(event.target===this)this.style.display='none'" style="
+        display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+        background:rgba(0,0,0,0.7);z-index:9998;align-items:center;justify-content:center;
+    ">
+        <div style="
+            background:#1a2f5a;border:1px solid #D4A017;border-radius:12px;
+            padding:40px;max-width:560px;width:90%;position:relative;
+            font-family:'Segoe UI',sans-serif;
+        ">
+            <button onclick="document.getElementById('infoModal').style.display='none'" style="
+                position:absolute;top:16px;right:16px;background:transparent;
+                border:none;color:#8899aa;font-size:1.2rem;cursor:pointer;
+            ">✕</button>
+            <h2 style="color:#D4A017;font-size:1.1rem;letter-spacing:2px;margin-bottom:16px;">ABOUT THIS DEMO</h2>
+            <p style="color:#ffffff;font-size:0.95rem;line-height:1.7;margin-bottom:20px;">
+                Ardevo is a real-time fraud detection tool built specifically for Ghana's mobile money ecosystem. When you press <strong style="color:#D4A017;">RUN ANALYSIS</strong>, the system simulates 100 MoMo transactions and evaluates each one against a set of fraud detection rules based on documented attack patterns in Ghana.
+            </p>
+            <div style="border-top:1px solid #2a4a7a;padding-top:20px;margin-bottom:20px;">
+                <p style="color:#D4A017;font-size:0.8rem;letter-spacing:1px;margin-bottom:12px;">WHAT THE NUMBERS MEAN</p>
+                <div style="margin-bottom:12px;"><span style="color:#ffffff;font-weight:bold;">Analyzed</span> <span style="color:#8899aa;font-size:0.9rem;">— Total transactions processed in this run.</span></div>
+                <div style="margin-bottom:12px;"><span style="color:#ffffff;font-weight:bold;">Flagged</span> <span style="color:#8899aa;font-size:0.9rem;">— Transactions identified as suspicious. These would trigger an alert in a live environment.</span></div>
+                <div style="margin-bottom:12px;"><span style="color:#ffffff;font-weight:bold;">High Risk</span> <span style="color:#8899aa;font-size:0.9rem;">— Transactions above the high risk threshold requiring immediate attention.</span></div>
+                <div style="margin-bottom:12px;"><span style="color:#ffffff;font-weight:bold;">Flag Rate</span> <span style="color:#8899aa;font-size:0.9rem;">— Percentage flagged. A realistic MoMo fraud rate in Ghana typically falls between 5 and 15 percent.</span></div>
+            </div>
+            <div style="border-top:1px solid #2a4a7a;padding-top:20px;">
+                <p style="color:#D4A017;font-size:0.8rem;letter-spacing:1px;margin-bottom:12px;">WHAT THE TRANSACTION FEED SHOWS</p>
+                <p style="color:#8899aa;font-size:0.9rem;line-height:1.6;">Each card represents a flagged transaction. Red border = high risk, amber = medium risk. Each card shows the transaction ID, type, sender phone number, amount in GHS, and mobile network.</p>
+            </div>
+            <div style="border-top:1px solid #2a4a7a;padding-top:20px;margin-top:4px;">
+                <p style="color:#8899aa;font-size:0.8rem;line-height:1.5;text-align:center;font-style:italic;">This is a simulated demo. In a live deployment, Ardevo connects directly to a fintech platform's transaction feed and monitors in real time.</p>
             </div>
         </div>
     </div>
-    <script>
+
+    <!-- Stats grid -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="number" id="total">0</div>
+            <div class="label">ANALYZED</div>
+        </div>
+        <div class="stat-card">
+            <div class="number" id="flagged">0</div>
+            <div class="label">FLAGGED</div>
+        </div>
+        <div class="stat-card">
+            <div class="number" id="high">0</div>
+            <div class="label">HIGH RISK</div>
+        </div>
+        <div class="stat-card">
+            <div class="number" id="flagRate">0%</div>
+            <div class="label">FLAG RATE</div>
+        </div>
+    </div>
+
+    <!-- Fraud pattern breakdown (hidden until analysis completes) -->
+    <div id="patternBreakdown">
+        <div class="pattern-title">FRAUD PATTERNS DETECTED THIS RUN</div>
+        <div class="pattern-grid">
+            <div class="pattern-item" id="pat-reversal">
+                <span class="pattern-name">Fake Reversal Attempts</span>
+                <span class="pattern-count" id="cnt-reversal">0</span>
+            </div>
+            <div class="pattern-item" id="pat-latenight">
+                <span class="pattern-name">Late Night Activity</span>
+                <span class="pattern-count" id="cnt-latenight">0</span>
+            </div>
+            <div class="pattern-item" id="pat-velocity">
+                <span class="pattern-name">Velocity Abuse</span>
+                <span class="pattern-count" id="cnt-velocity">0</span>
+            </div>
+            <div class="pattern-item" id="pat-largeamt">
+                <span class="pattern-name">Large Amount Signal</span>
+                <span class="pattern-count" id="cnt-largeamt">0</span>
+            </div>
+            <div class="pattern-item" id="pat-newsender">
+                <span class="pattern-name">New / Unknown Sender</span>
+                <span class="pattern-count" id="cnt-newsender">0</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Transaction feed -->
+    <p class="section-title">TRANSACTION FEED</p>
+    <div class="transaction-feed" id="feed">
+        <div class="empty-state">
+            <p>Press RUN ANALYSIS to begin monitoring</p>
+        </div>
+    </div>
+
+    <!-- Loading state (injected into feed during scan) -->
+    <div id="loadingState">
+        <div class="loading-label">SCANNING TRANSACTIONS...</div>
+        <div class="loading-counter" id="loadingCounter">0 / 100</div>
+        <div class="loading-bar-track">
+            <div class="loading-bar-fill" id="loadingBar"></div>
+        </div>
+    </div>
+
+</div>
+
+<!-- ── WHY ARDEVO ── -->
+<section id="whyArdevo">
+    <p class="why-eyebrow">WHY ARDEVO</p>
+    <h2 class="why-headline">Ghana loses billions to MoMo fraud.<br><span>Ardevo was built to stop it.</span></h2>
+    <p class="why-body">
+        Mobile money fraud is the fastest-growing financial crime in West Africa. Existing tools are generic, expensive, and built for Western markets. Ardevo is purpose-built for Ghana's MoMo ecosystem — detecting the specific attack patterns that generic tools miss.
+    </p>
+    <div class="why-stats">
+        <div class="why-stat-item">
+            <div class="why-stat-number">GHS 1B+</div>
+            <div class="why-stat-label">LOST TO MOMO FRAUD ANNUALLY</div>
+        </div>
+        <div class="why-stat-item">
+            <div class="why-stat-number">17M+</div>
+            <div class="why-stat-label">ACTIVE MOMO USERS IN GHANA</div>
+        </div>
+        <div class="why-stat-item">
+            <div class="why-stat-number">Real-Time</div>
+            <div class="why-stat-label">DETECTION BUILT FOR SCALE</div>
+        </div>
+    </div>
+    <a href="mailto:dadziefelix@gmail.com?subject=Ardevo%20Inquiry" class="cta-btn">CONTACT FELIX</a>
+    <p class="cta-sub">Interested in a live integration or partnership? Let's talk.</p>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer style="
+    background:#0f1923;border-top:1px solid #D4A017;
+    padding:20px 40px;text-align:center;color:#8899aa;
+    font-family:'Segoe UI',sans-serif;font-size:0.8rem;letter-spacing:1px;
+">
+    © 2026 Ardevo. All rights reserved. | Built by Felix Dadzie
+</footer>
+
+<script>
     let totalCount = 0;
     let flaggedCount = 0;
     let highCount = 0;
+
+    // Pattern counters
+    const patternCounts = {
+        reversal: 0,
+        latenight: 0,
+        velocity: 0,
+        largeamt: 0,
+        newsender: 0
+    };
 
     function generatePhone() {
         const prefixes = ["024","054","055","059","026","056","027","020","050"];
@@ -586,20 +717,19 @@ fetch(url, { method: 'GET' })
 
     function generateAmount() {
         const roundNumbers = [200, 500, 1000, 1500, 2000, 2500];
-        return Math.random() < 0.3 
+        return Math.random() < 0.3
             ? roundNumbers[Math.floor(Math.random() * roundNumbers.length)]
             : Math.floor(20 + Math.random() * 2980);
     }
 
     function generateTransaction() {
         const types = ["send_money","send_money","send_money","send_money",
-                      "cash_out","cash_out","cash_out","cash_in","cash_in",
-                      "bill_payment","reversal_request"];
+                       "cash_out","cash_out","cash_out","cash_in","cash_in",
+                       "bill_payment","reversal_request"];
         const networks = ["MTN","MTN","MTN","MTN","MTN","MTN","MTN",
-                         "AirtelTigo","AirtelTigo","AirtelTigo","Vodafone"];
+                          "AirtelTigo","AirtelTigo","AirtelTigo","Vodafone"];
         const channels = ["USSD","USSD","USSD","USSD","USSD","Agent","Agent","Agent","App","App"];
         const hour = Math.floor(Math.random() * 24);
-
         return {
             trans_id: crypto.randomUUID(),
             sender_phone: generatePhone(),
@@ -618,13 +748,16 @@ fetch(url, { method: 'GET' })
 
     function detectFraud(tx) {
         let score = 0;
+        let patterns = [];
 
         if (tx.trans_type === "reversal_request") {
             score += 30;
+            patterns.push('reversal');
         }
 
         if (!seenSenders.has(tx.sender_phone)) {
             score += 10;
+            patterns.push('newsender');
         }
         seenSenders.add(tx.sender_phone);
 
@@ -633,15 +766,47 @@ fetch(url, { method: 'GET' })
             reversalSenders.add(tx.sender_phone);
         }
 
-        if (tx.hour < 5) score += 25;
-        if (tx.amount_ghs > 2500) score += 15;
+        if (tx.hour < 5) {
+            score += 25;
+            patterns.push('latenight');
+        }
+
+        if (tx.amount_ghs > 2500) {
+            score += 15;
+            patterns.push('largeamt');
+        }
 
         senderCounts[tx.sender_phone] = (senderCounts[tx.sender_phone] || 0) + 1;
-        if (senderCounts[tx.sender_phone] >= 3) score += 35;
+        if (senderCounts[tx.sender_phone] >= 3) {
+            score += 35;
+            patterns.push('velocity');
+        }
 
-        if (score >= 60) return { score, level: "HIGH", cls: "high" };
-        if (score >= 45) return { score, level: "MEDIUM", cls: "medium" };
-        return { score, level: "LOW", cls: "low" };
+        if (score >= 60) return { score, level: "HIGH", cls: "high", patterns };
+        if (score >= 45) return { score, level: "MEDIUM", cls: "medium", patterns };
+        return { score, level: "LOW", cls: "low", patterns };
+    }
+
+    function updatePatternCounts(result) {
+        // Only count patterns for flagged transactions
+        if (result.level === "LOW") return;
+        result.patterns.forEach(function(p) {
+            if (patternCounts.hasOwnProperty(p)) {
+                patternCounts[p]++;
+            }
+        });
+    }
+
+    function renderPatternBreakdown() {
+        ['reversal','latenight','velocity','largeamt','newsender'].forEach(function(key) {
+            const count = patternCounts[key];
+            const el = document.getElementById('cnt-' + key);
+            const row = document.getElementById('pat-' + key);
+            el.textContent = count;
+            el.className = 'pattern-count' + (count === 0 ? ' zero' : '');
+            row.className = 'pattern-item' + (count > 0 ? ' active' : '');
+        });
+        document.getElementById('patternBreakdown').style.display = 'block';
     }
 
     function updateStats(result) {
@@ -653,15 +818,12 @@ fetch(url, { method: 'GET' })
         document.getElementById("total").textContent = totalCount;
         document.getElementById("flagged").textContent = flaggedCount;
         document.getElementById("high").textContent = highCount;
-        document.getElementById("flagRate").textContent = 
+        document.getElementById("flagRate").textContent =
             Math.round((flaggedCount / totalCount) * 100) + "%";
     }
 
     function addTransactionCard(tx, result) {
         const feed = document.getElementById("feed");
-        const emptyState = feed.querySelector(".empty-state");
-        if (emptyState) emptyState.remove();
-
         const card = document.createElement("div");
         card.className = `transaction-card ${result.cls}`;
         card.innerHTML = `
@@ -693,41 +855,59 @@ fetch(url, { method: 'GET' })
     }
 
     async function runAnalysis() {
-        totalCount = 0;
-        flaggedCount = 0;
-        highCount = 0;
-        seenSenders.clear();
-        reversalSenders.clear();
+        // Reset counters
+        totalCount = 0; flaggedCount = 0; highCount = 0;
+        seenSenders.clear(); reversalSenders.clear();
         Object.keys(senderCounts).forEach(k => delete senderCounts[k]);
+        Object.keys(patternCounts).forEach(k => patternCounts[k] = 0);
+
+        // Reset UI
         document.getElementById("feed").innerHTML = '';
         document.getElementById("total").textContent = "0";
         document.getElementById("flagged").textContent = "0";
         document.getElementById("high").textContent = "0";
         document.getElementById("flagRate").textContent = "0%";
+        document.getElementById("patternBreakdown").style.display = "none";
+        document.getElementById("runAgainBtn").style.display = "none";
 
+        // Disable run button
+        const runBtn = document.getElementById("runBtn");
+        runBtn.disabled = true;
+
+        // Show loading state
+        const loadingEl = document.getElementById("loadingState");
+        const loadingCounter = document.getElementById("loadingCounter");
+        const loadingBar = document.getElementById("loadingBar");
+        loadingEl.style.display = "block";
+        loadingCounter.textContent = "0 / 100";
+        loadingBar.style.width = "0%";
+
+        // Loading phase — scan animation for 1.5s before feed populates
+        for (let i = 1; i <= 100; i++) {
+            loadingCounter.textContent = i + " / 100";
+            loadingBar.style.width = i + "%";
+            await new Promise(r => setTimeout(r, 15));
+        }
+        loadingEl.style.display = "none";
+
+        // Analysis phase — process transactions and populate feed
         for (let i = 0; i < 100; i++) {
             const tx = generateTransaction();
             const result = detectFraud(tx);
             updateStats(result);
+            updatePatternCounts(result);
             if (result.level !== "LOW") {
                 addTransactionCard(tx, result);
             }
             await new Promise(r => setTimeout(r, 50));
         }
-      document.getElementById('runAgainBtn').style.display = 'block';
+
+        // Re-enable buttons and show results
+        runBtn.disabled = false;
+        document.getElementById("runAgainBtn").style.display = "block";
+        renderPatternBreakdown();
     }
 </script>
-<footer style="
-        background: #0f1923;
-        border-top: 1px solid #D4A017;
-        padding: 20px 40px;
-        text-align: center;
-        color: #8899aa;
-        font-family: 'Segoe UI', sans-serif;
-        font-size: 0.8rem;
-        letter-spacing: 1px;
-    ">
-        © 2026 Ardevo. All rights reserved. | Built by Felix Dadzie
-    </footer>
+
 </body>
 </html>
