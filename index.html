@@ -595,6 +595,22 @@ function submitGate() {
     </div>
 </header>
 
+<!-- ── VISITOR COUNTER BAR ── -->
+<div id="visitorBar" style="
+    background: #111e2e;
+    border-bottom: 1px solid #1a3a5a;
+    padding: 10px 40px;
+    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 1px;
+    color: #4a6a8a;
+    display: none;
+">
+    <span style="color: #2ecc71; margin-right: 6px;">●</span>
+    <span id="visitorCount">—</span> professionals have accessed this demo
+</div>
+
 <!-- ── MAIN ── -->
 <div class="main">
 
@@ -959,6 +975,22 @@ function submitGate() {
         document.getElementById("runAgainBtn").style.display = "block";
         renderPatternBreakdown();
     }
+
+    // ── VISITOR COUNTER ──
+    (function fetchVisitorCount() {
+        var url = 'https://script.google.com/macros/s/AKfycbz0mxvFx6OG4RCYRJ4BsYR_P1NCbHajHim009LXo-rrC0G3JeuZJgD4Lnjr0-AJSPoPJA/exec?action=count';
+        fetch(url)
+            .then(function(res) { return res.json(); })
+            .then(function(data) {
+                if (data.result === 'success' && data.count > 0) {
+                    document.getElementById('visitorCount').textContent = data.count;
+                    document.getElementById('visitorBar').style.display = 'block';
+                }
+            })
+            .catch(function() {
+                // Fail silently — counter just stays hidden if fetch fails
+            });
+    })();
 </script>
 
 </body>
