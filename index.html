@@ -444,7 +444,23 @@ fetch(url, { method: 'GET' })
             <h1>ARDEVO</h1>
             <p>WATCH. DETECT. PROTECT.</p>
         </div>
+      document.getElementById('runAgainBtn').style.display = 'none';
         <button class="run-btn" onclick="runAnalysis()">RUN ANALYSIS</button>
+      <button id="runAgainBtn" onclick="runAnalysis()" style="
+    display: none;
+    background: transparent;
+    border: 2px solid #D4A017;
+    color: #D4A017;
+    padding: 10px 28px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-radius: 4px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    font-family: 'Segoe UI', sans-serif;
+    margin-left: 16px;
+    transition: all 0.3s ease;
+">↺ RUN AGAIN</button>
     </header>
 <div class="main">
   <div style="text-align: center; margin-bottom: 24px;">
@@ -698,6 +714,7 @@ fetch(url, { method: 'GET' })
             }
             await new Promise(r => setTimeout(r, 50));
         }
+      document.getElementById('runAgainBtn').style.display = 'block';
     }
 </script>
 <footer style="
