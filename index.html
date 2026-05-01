@@ -554,6 +554,11 @@
 </div>
 
 <script>
+// Skip gate if visitor has already submitted before
+if (localStorage.getItem('ardevo_access') === 'true') {
+    document.getElementById('gate').style.display = 'none';
+}
+
 function submitGate() {
     var name = document.getElementById('gateName').value.trim();
     var email = document.getElementById('gateEmail').value.trim();
@@ -567,8 +572,14 @@ function submitGate() {
     btn.textContent = 'LOADING...'; btn.disabled = true;
     var url = 'https://script.google.com/macros/s/AKfycbz0mxvFx6OG4RCYRJ4BsYR_P1NCbHajHim009LXo-rrC0G3JeuZJgD4Lnjr0-AJSPoPJA/exec?name=' + encodeURIComponent(name) + '&email=' + encodeURIComponent(email);
     fetch(url, { method: 'GET' })
-        .then(function() { document.getElementById('gate').style.display = 'none'; })
-        .catch(function() { document.getElementById('gate').style.display = 'none'; });
+        .then(function() {
+            localStorage.setItem('ardevo_access', 'true');
+            document.getElementById('gate').style.display = 'none';
+        })
+        .catch(function() {
+            localStorage.setItem('ardevo_access', 'true');
+            document.getElementById('gate').style.display = 'none';
+        });
 }
 </script>
 
