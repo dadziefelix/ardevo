@@ -361,6 +361,42 @@
             margin-top: 6px;
         }
 
+        .why-stat-source {
+            color: #3a5a7a;
+            font-size: 0.65rem;
+            letter-spacing: 0.5px;
+            margin-top: 5px;
+        }
+
+        .why-sources {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+            margin-bottom: 44px;
+            margin-top: -8px;
+            padding: 0 20px;
+        }
+
+        .why-source-line {
+            color: #3a5a7a;
+            font-size: 0.68rem;
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+
+        .why-source-line a {
+            color: #4a6a8a;
+            text-decoration: none;
+            border-bottom: 1px solid #2a4a6a;
+            transition: color 0.2s ease;
+        }
+
+        .why-source-line a:hover {
+            color: #D4A017;
+            border-bottom-color: #D4A017;
+        }
+
         .cta-btn {
             display: inline-block;
             background: #D4A017;
@@ -664,23 +700,28 @@ function submitGate() {
 <!-- ── WHY ARDEVO ── -->
 <section id="whyArdevo">
     <p class="why-eyebrow">WHY ARDEVO</p>
-    <h2 class="why-headline">Ghana loses billions to MoMo fraud.<br><span>Ardevo was built to stop it.</span></h2>
+    <h2 class="why-headline">Ghana's MoMo fraud crisis is growing.<br><span>Ardevo was built to stop it.</span></h2>
     <p class="why-body">
         Mobile money fraud is the fastest-growing financial crime in West Africa. Existing tools are generic, expensive, and built for Western markets. Ardevo is purpose-built for Ghana's MoMo ecosystem — detecting the specific attack patterns that generic tools miss.
     </p>
     <div class="why-stats">
         <div class="why-stat-item">
-            <div class="why-stat-number">GHS 1B+</div>
-            <div class="why-stat-label">LOST TO MOMO FRAUD ANNUALLY</div>
+            <div class="why-stat-number">GHS 346M+</div>
+            <div class="why-stat-label">LOST TO MOMO FRAUD IN 2023 ¹</div>
         </div>
         <div class="why-stat-item">
-            <div class="why-stat-number">17M+</div>
-            <div class="why-stat-label">ACTIVE MOMO USERS IN GHANA</div>
+            <div class="why-stat-number">27M+</div>
+            <div class="why-stat-label">ACTIVE MOMO ACCOUNTS IN GHANA ²</div>
         </div>
         <div class="why-stat-item">
-            <div class="why-stat-number">Real-Time</div>
-            <div class="why-stat-label">DETECTION BUILT FOR SCALE</div>
+            <div class="why-stat-number">65%</div>
+            <div class="why-stat-label">OF USERS TARGETED BY FRAUD ³</div>
         </div>
+    </div>
+    <div class="why-sources">
+        <span class="why-source-line">¹ <a href="https://www.telecomschamber.org" target="_blank" rel="noopener">Ghana Chamber of Telecommunications, 2023</a></span>
+        <span class="why-source-line">² <a href="https://www.bog.gov.gh" target="_blank" rel="noopener">Bank of Ghana, Feb 2026</a></span>
+        <span class="why-source-line">³ <a href="https://www.ecrimebureauafrica.org" target="_blank" rel="noopener">E-Crime Bureau Digital Fraud Analysis, 2024</a></span>
     </div>
     <a href="mailto:dadziefelix@gmail.com?subject=Ardevo%20Inquiry" class="cta-btn">CONTACT FELIX</a>
     <p class="cta-sub">Interested in a live integration or partnership? Let's talk.</p>
