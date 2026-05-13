@@ -617,10 +617,19 @@ function submitGate() {
     fetch(url, { method: 'GET' })
         .then(function() {
             localStorage.setItem('ardevo_access', 'true');
+            gtag('event', 'gate_submission', {
+                'event_category': 'engagement',
+                'event_label': 'demo_access_granted'
+});
+          
             document.getElementById('gate').style.display = 'none';
         })
         .catch(function() {
             localStorage.setItem('ardevo_access', 'true');
+            gtag('event', 'gate_submission', {
+                'event_category': 'engagement',
+                'event_label': 'demo_access_granted'
+});
             document.getElementById('gate').style.display = 'none';
         });
 }
