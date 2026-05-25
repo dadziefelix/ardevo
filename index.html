@@ -587,6 +587,25 @@ header {
         </div>
     </div>
 
+    <!-- One-time follow-up message -->
+    <div style="
+        background:rgba(212,160,23,0.06);
+        border:1px solid rgba(212,160,23,0.18);
+        border-radius:8px;
+        padding:12px 16px;
+        margin-bottom:20px;
+        text-align:left;
+        display:flex;
+        gap:10px;
+        align-items:flex-start;
+    ">
+        <span style="color:#D4A017;font-size:0.9rem;line-height:1;margin-top:1px;flex-shrink:0;">✦</span>
+        <p style="color:#8899aa;font-size:0.76rem;line-height:1.65;margin:0;">
+            We'll send you <strong style="color:#c8d8e8;font-weight:600;">one short follow-up</strong> asking for your feedback on the demo. That's it.
+            No spam. No third party sharing. Ever.
+        </p>
+    </div>
+
     <input type="text"  id="gateName"  placeholder="Your Full Name" style="
         width:100%;padding:13px 16px;background:rgba(6,13,20,0.8);
         border:1px solid rgba(42,74,122,0.6);border-radius:8px;
@@ -621,8 +640,26 @@ header {
     ">ACCESS DEMO</button>
 
     <p id="gateError" style="color:#e74c3c;font-size:0.82rem;margin-top:14px;display:none;"></p>
-    <p style="color:#3a5870;font-size:0.7rem;margin-top:22px;line-height:1.6;">
-        Your information will not be shared with third parties.<br>© 2026 Ardevo. All rights reserved.
+
+    <div style="text-align:center;margin-top:16px;">
+        <button onclick="skipGate()" style="
+            background:none;border:none;cursor:pointer;
+            color:#3a5870;font-size:0.75rem;
+            font-family:'Inter',sans-serif;
+            letter-spacing:0.5px;
+            text-decoration:underline;
+            text-decoration-color:rgba(58,88,112,0.4);
+            text-underline-offset:3px;
+            transition:color 0.2s ease;
+            padding:4px 8px;
+        "
+        onmouseover="this.style.color='#6b7f96'"
+        onmouseout="this.style.color='#3a5870'"
+        >Skip for now</button>
+    </div>
+
+    <p style="color:#2a4a62;font-size:0.68rem;margin-top:18px;line-height:1.6;">
+        © 2026 Ardevo. All rights reserved.
     </p>
 </div>
 </div>
@@ -673,8 +710,22 @@ function submitGate() {
     var url = 'https://script.google.com/macros/s/AKfycbz0mxvFx6OG4RCYRJ4BsYR_P1NCbHajHim009LXo-rrC0G3JeuZJgD4Lnjr0-AJSPoPJA/exec?name='
               + encodeURIComponent(name) + '&email=' + encodeURIComponent(email);
     fetch(url, { method:'GET' })
-        .then(function() { localStorage.setItem('ardevo_access','true'); document.getElementById('gate').style.display='none'; })
-        .catch(function() { localStorage.setItem('ardevo_access','true'); document.getElementById('gate').style.display='none'; });
+        .then(function() {
+            gtag('event', 'gate_submission', { 'method': 'email' });
+            localStorage.setItem('ardevo_access','true');
+            document.getElementById('gate').style.display='none';
+        })
+        .catch(function() {
+            gtag('event', 'gate_submission', { 'method': 'email' });
+            localStorage.setItem('ardevo_access','true');
+            document.getElementById('gate').style.display='none';
+        });
+}
+
+function skipGate() {
+    gtag('event', 'gate_skip');
+    localStorage.setItem('ardevo_access','true');
+    document.getElementById('gate').style.display = 'none';
 }
 </script>
 
@@ -1337,6 +1388,12 @@ function addTransactionCard(tx, result) {
 // 13 seeded fraud transactions + 87 random, Fisher-Yates shuffled
 // ─────────────────────────────────────────────────────────────
 async function runAnalysis() {
+
+    // Fire a Google Analytics event every time the button is pressed.
+    // 'run_type' lets you split first-time runs from repeat runs in GA reports.
+    gtag('event', 'run_analysis', {
+        'run_type': totalCount > 0 ? 'run_again' : 'first_run'
+    });
 
     // Reset counters and session state
     totalCount = 0; flaggedCount = 0; highCount = 0;
