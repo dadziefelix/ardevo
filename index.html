@@ -743,9 +743,14 @@ function skipGate() {
             DEMO LIVE
         </div>
     </div>
-    <div class="header-btns">
-        <button id="runAgainBtn" onclick="runAnalysis()">↺ RUN AGAIN</button>
-        <button class="run-btn" id="runBtn" onclick="runAnalysis()">RUN ANALYSIS</button>
+    <div class="header-btns" style="flex-direction:column;align-items:flex-end;gap:10px;">
+        <p style="color:var(--muted);font-size:0.72rem;line-height:1.5;text-align:right;max-width:380px;letter-spacing:0.2px;">
+            Ardevo evaluates every MoMo transaction against 12 fraud detection rules and returns a risk score in real time before money moves.
+        </p>
+        <div style="display:flex;gap:12px;align-items:center;">
+            <button id="runAgainBtn" onclick="runAnalysis()">↺ RUN AGAIN</button>
+            <button class="run-btn" id="runBtn" onclick="runAnalysis()">RUN ANALYSIS</button>
+        </div>
     </div>
 </header>
 
@@ -1331,6 +1336,11 @@ function renderPatternBreakdown() {
     document.getElementById('patternBreakdown').style.display = 'block';
 }
 
+function maskPhone(phone) {
+    if (!phone || phone.length < 6) return phone;
+    return phone.slice(0, 3) + '••••' + phone.slice(-3);
+}
+
 function addTransactionCard(tx, result) {
     const feed = document.getElementById('feed');
 
@@ -1358,7 +1368,7 @@ function addTransactionCard(tx, result) {
             </div>
             <div>
                 <div class="tx-label">SENDER</div>
-                <div class="tx-value">${tx.sender_phone}</div>
+                <div class="tx-value">${maskPhone(tx.sender_phone)}</div>
                 <div class="tx-sub">${tx.sender_accnt_type}</div>
             </div>
             <div>
